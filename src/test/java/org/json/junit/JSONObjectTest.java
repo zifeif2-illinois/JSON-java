@@ -81,6 +81,7 @@ import org.junit.Test;
 import com.jayway.jsonpath.Configuration;
 import com.jayway.jsonpath.JsonPath;
 
+import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 /**
  * JSONObject, along with JSONArray, are the central classes of the reference app.
  * All of the other classes interact with them, and JSON functionality would
@@ -1934,8 +1935,10 @@ public class JSONObjectTest {
                 "\"key3\":\"val3\""+
              "}";
         JSONObject jsonObject = new JSONObject(jsonObjectStr);
-        assertTrue("jsonObject valueToString() incorrect",
-                JSONObject.valueToString(jsonObject).equals(jsonObject.toString()));
+	assertThatJson(jsonObject).isEqualTo(JSONObject.valueToString(jsonObject));
+	assertThatJson(jsonObject).isEqualTo(jsonObject.toString());
+        /*assertTrue("jsonObject valueToString() incorrect",
+                JSONObject.valueToString(jsonObject).equals(jsonObject.toString()));*/
         String jsonArrayStr = 
             "[1,2,3]";
         JSONArray jsonArray = new JSONArray(jsonArrayStr);
@@ -1945,8 +1948,9 @@ public class JSONObjectTest {
         map.put("key1", "val1");
         map.put("key2", "val2");
         map.put("key3", "val3");
-        assertTrue("map valueToString() incorrect",
-                jsonObject.toString().equals(JSONObject.valueToString(map))); 
+	assertThatJson(jsonObject).isEqualTo(JSONObject.valueToString(map));
+        /*assertTrue("map valueToString() incorrect",
+                jsonObject.toString().equals(JSONObject.valueToString(map)));*/ 
         Collection<Integer> collection = new ArrayList<Integer>();
         collection.add(new Integer(1));
         collection.add(new Integer(2));

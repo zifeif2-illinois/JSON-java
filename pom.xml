@@ -95,10 +95,21 @@
             <version>1.9.5</version>
             <scope>test</scope>
         </dependency>
+<dependency>
+    <groupId>net.javacrumbs.json-unit</groupId>
+    <artifactId>json-unit-assertj</artifactId>
+    <version>2.19.0</version>
+    <scope>test</scope>
+</dependency>
     </dependencies>
 
     <build>
         <plugins>
+	    <plugin>
+		<groupId>edu.illinois</groupId>
+		<artifactId>nondex-maven-plugin</artifactId>
+		<version>1.1.2</version>
+	    </plugin>
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
@@ -188,6 +199,22 @@
                     </archive>
                 </configuration>
             </plugin>
+        <plugin>
+                <groupId>edu.illinois.cs</groupId>
+                <artifactId>testrunner-maven-plugin</artifactId>
+                <version>1.0</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>edu.illinois.cs</groupId>
+                        <artifactId>idflakies</artifactId>
+                        <version>1.0.1</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <className>edu.illinois.cs.dt.tools.detection.DetectorPlugin</className>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
+
